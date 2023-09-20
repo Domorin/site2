@@ -22,7 +22,7 @@
 	font-family: "Electrolize", sans-serif;
 }
 
-link {
+.link {
 	@apply text-primary underline;
 }
 

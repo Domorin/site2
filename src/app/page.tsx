@@ -8,7 +8,7 @@ export default function Home() {
 	return (
 		<main className="w-full h-full flex items-center flex-col bg-opacity-0">
 			{/* <div className="flex flex-col items-center mt-24 bg-gradient-to-r from-black/0 via-blue-700 to-black/0 w-1/2 p-8 "> */}
-			<div className="flex gap-8 flex-col items-center mt-32 w-[820px] p-8 main-container bg-container/95 shadow-container/95 shadow-[0px_0px_48px_64px]">
+			<div className="flex gap-8 flex-col items-center mt-16 w-[820px] p-8 bg-container/75 rounded-lg border-primary border">
 				<h1 className="text-6xl">
 					Hi, I'm{" "}
 					<span className="font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
