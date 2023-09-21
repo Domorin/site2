@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ExperienceItem } from "./_components/experience_item";
 import { Container } from "./_components/container";
 import { Section } from "./_components/section";
+import { CatImage } from "./_components/cat_image";
 
 // https://coolors.co/000000-f0f0c9-f2bb05-d74e09-3454d1
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
 					<p>
 						I'm a fullstack software engineer currently residing in
 						Portland, Oregon. My passion lies in crafting innovative
-						product designs and bringing them to life.. When I'm not
+						product designs and bringing them to life. When I'm not
 						creating cool stuff, you can find me{" "}
 						<a
 							className="link"
@@ -42,10 +43,14 @@ export default function Home() {
 						>
 							gaming
 						</a>
-						, petting cats, and playing pickleball.
+						, playing pickleball, and petting{" "}
+						<a className="link" href="#cats">
+							cats
+						</a>
+						.
 					</p>
 				</Container>
-				<Section title="My Stuff">
+				<Section id="stuff" title="My Stuff">
 					<div className="flex gap-8 flex-wrap justify-center">
 						<Card
 							className="border-sesh-bg"
@@ -135,7 +140,7 @@ export default function Home() {
 						/>
 					</div>
 				</Section>
-				<Section title="My Experience">
+				<Section id="experience" title="My Experience">
 					<div className="flex flex-col gap-4">
 						<Container className="flex flex-col w-full gap-4 p-8">
 							<div className="text-2xl w-full">Tunks LLC</div>
@@ -186,7 +191,7 @@ export default function Home() {
 						</Container>
 					</div>
 				</Section>
-				<Section title="My Education">
+				<Section id="education" title="My Education">
 					<div className="flex flex-col w-full gap-4">
 						<Container className="p-8 w-full h-full">
 							<ExperienceItem
@@ -208,7 +213,34 @@ export default function Home() {
 						</Container>
 					</div>
 				</Section>
-				<Section title="My Cats">cats</Section>
+				<Section id="cats" title="My Cats">
+					<div className="flex w-full h-[42rem]">
+						<div className="w-1/2 h-full">
+							<CatImage
+								cuteImage={{
+									src: "/cats/cute_egbert.JPEG",
+									title: "Egbert",
+								}}
+								weirdImage={{
+									src: "/cats/ugly_egbert.JPEG",
+									title: "Weird Egbert",
+								}}
+							/>
+						</div>
+						<div className="w-1/2">
+							<CatImage
+								cuteImage={{
+									src: "/cats/cute_sypha.JPEG",
+									title: "Sypha",
+								}}
+								weirdImage={{
+									src: "/cats/weird_sypha.JPEG",
+									title: "Weird Sypha",
+								}}
+							/>
+						</div>
+					</div>
+				</Section>
 			</div>
 		</main>
 	);

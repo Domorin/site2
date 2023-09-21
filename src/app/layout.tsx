@@ -1,12 +1,16 @@
 import classNames from "classnames";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Electrolize } from "next/font/google";
+import { Inter, Electrolize, Gloria_Hallelujah } from "next/font/google";
 import * as shader from "./_shaders/bg_shader";
 import { Shader } from "./_components/shader";
 
 const inter = Inter({ subsets: ["latin"] });
 export const ElectrolizeFont = Electrolize({
+	weight: "400",
+	subsets: ["latin"],
+});
+export const WeirdFont = Gloria_Hallelujah({
 	weight: "400",
 	subsets: ["latin"],
 });
