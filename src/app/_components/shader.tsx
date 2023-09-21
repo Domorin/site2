@@ -8,7 +8,6 @@ import {
 	useShaderSettings,
 } from "../_hooks/use_shader_settings";
 import { ShaderDropdown } from "./shader_dropdown";
-const glslCanvas = require("glslCanvas");
 
 export function Shader() {
 	const [shaderSettings, setShaderSettings] = useState({
@@ -21,6 +20,9 @@ export function Shader() {
 	const sandboxRef = useRef<any>(null);
 
 	useEffect(() => {
+		const glslCanvas = require("glslCanvas");
+
+		console.log("useEffect");
 		const canvas = document.createElement("canvas");
 		canvas.style.width = "100vw";
 		canvas.style.height = "100vh";
@@ -38,8 +40,6 @@ export function Shader() {
 
 		document.getElementById("shader-parent")?.replaceChildren(canvas);
 	}, [shaderSettings.enabled]);
-
-	console.log(sandboxRef.current, shaderSettings.speed);
 
 	sandboxRef.current?.setUniform("u_speed", shaderSettings.speed);
 	sandboxRef.current?.setUniform("u_brightness", shaderSettings.brightness);
