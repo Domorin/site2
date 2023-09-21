@@ -10,9 +10,9 @@ import { CatImage } from "./_components/cat_image";
 // https://coolors.co/000000-f0f0c9-f2bb05-d74e09-3454d1
 export default function Home() {
 	return (
-		<main className="w-full h-full flex items-center flex-col bg-opacity-0">
+		<main className="w-full h-full flex items-center flex-col bg-opacity-0 px-1">
 			{/* <div className="flex flex-col items-center mt-24 bg-gradient-to-r from-black/0 via-blue-700 to-black/0 w-1/2 p-8 "> */}
-			<div className="flex gap-8 flex-col items-center my-12 w-[860px] rounded-lg">
+			<div className="flex gap-8 flex-col items-center my-12 w-full sm:w-[860px] rounded-lg">
 				<h1 className="text-6xl">
 					Hi, I'm{" "}
 					<span className="font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
@@ -214,8 +214,8 @@ export default function Home() {
 					</div>
 				</Section>
 				<Section id="cats" title="My Cats">
-					<div className="flex w-full h-[42rem]">
-						<div className="w-1/2 h-full">
+					<div className="flex sm:flex-row flex-col w-full h-[42rem]">
+						<div className="h-full sm:w-1/2">
 							<CatImage
 								cuteImage={{
 									src: "/cats/cute_egbert.JPEG",
@@ -227,7 +227,7 @@ export default function Home() {
 								}}
 							/>
 						</div>
-						<div className="w-1/2">
+						<div className="sm:w-1/2">
 							<CatImage
 								cuteImage={{
 									src: "/cats/cute_sypha.JPEG",

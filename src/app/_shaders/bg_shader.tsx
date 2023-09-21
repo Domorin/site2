@@ -18,7 +18,9 @@ float rand(vec2 n) {
 
 vec2 circle_center(vec2 g_id, vec2 offset) {
    //return vec2(sin(u_time), cos(u_time + g_id.x * 23.123)) * 0.1;
-   vec2 circle_center = vec2(sin(g_id.x * 124.1345 + g_id.y * 7.742), cos(g_id.y * 57.91 + 12.9 * g_id.x)) * sin(u_time * 0.1 * (0.5+rand(g_id)) + g_id.x * 124.123 + g_id.y * 79.123) * 0.5;
+   float time_seed = rand(g_id * 16.9123) * 0.1;
+
+   vec2 circle_center = vec2(sin(g_id.x * 124.1345 + g_id.y * 7.742 + u_time * time_seed), cos(g_id.y * 57.91 + 12.9 * g_id.x + u_time * time_seed)) * sin(u_time * 0.1 * (0.5+rand(g_id)) + g_id.x * 124.123 + g_id.y * 79.123) * 0.5;
 
    vec2 abs_circle_center = (circle_center + 1.) * 0.5;
    // [0, 1]
@@ -126,7 +128,7 @@ float circle(vec2 uv, vec2 g_id, vec2 offset) {
 
 
 void main() {
-   vec2 offset = vec2(u_time * 10., 0.);
+   vec2 offset = vec2(u_time * 5., 0.);
 
    vec2 uv = (gl_FragCoord.xy + offset)/u_resolution.xy;
 
@@ -163,7 +165,7 @@ void main() {
    
 
    // gl_FragColor = vec4(vec3(distance(gl_FragCoord.xy / u_resolution.xy, u_mouse.xy / u_resolution.xy) * 20.), 1.0);
-   gl_FragColor = vec4(vec3(0.), 1.) + vec4(color, 1.0) * pow(circle_alpha, 1.0);
+   gl_FragColor = vec4(vec3(0.), 1.) + vec4(color, 1.0) * pow(circle_alpha, 1.0) * clamp(u_time, 0.0, 1.0);
 
    // gl_FragColor = vec4(gl_FragColor.xyz, 0.0);
    // gl_FragColor = mix(vec4(1.,0.,0.,1.), vec4(1.), distanceFromLine(uv, m_uv, vec2(0.5)));
