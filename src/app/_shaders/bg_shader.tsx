@@ -6,10 +6,17 @@ precision highp float;
 uniform vec2 u_mouse;
 uniform vec2 u_resolution;
 uniform float u_time;
+uniform float u_brightness;
+uniform float u_speed;
+uniform float u_zoom;
 
-float amount = 20.;
+float default_amount = 10.;
 float remove_percent = 0.;
 float attraction_value = 50.;
+
+
+float max_brightness = 10.;
+float max_speed = 100.;
 
 float rand(vec2 n) { 
 	return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
@@ -26,7 +33,7 @@ vec2 circle_center(vec2 g_id, vec2 offset) {
    // [0, 1]
    abs_circle_center += g_id;
    // [6, 7]
-   abs_circle_center = abs_circle_center / (amount);
+   abs_circle_center = abs_circle_center / (default_amount * u_zoom);
 
    vec2 rel_mouse = ((u_mouse.xy + offset) / u_resolution.xy);
    rel_mouse.x *= u_resolution.x / u_resolution.y;
@@ -37,7 +44,7 @@ vec2 circle_center(vec2 g_id, vec2 offset) {
    abs_circle_center = mix(abs_circle_center, rel_mouse, mouse_dist_raw);
 
 
-   return ((abs_circle_center * amount - g_id) * 2.) - 1.;
+   return ((abs_circle_center * default_amount * u_zoom - g_id) * 2.) - 1.;
 
    //return circle_center;
    //return vec2(0.1, 0.1) + sin(u_time + g_id.x) * 0.1;
@@ -49,7 +56,7 @@ float distanceFromLine(vec2 p, vec2 uv, vec2 o_uv, float seed) {
    float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
 
    float dist = distance(p, uv);
-   float thickness = 0.03;// * 1./pow(dist, 0.6);
+   float thickness = 0.015;// * 1./pow(dist, 0.6);
    
 
    return smoothstep(thickness, thickness-0.01, length(pa - ba*h));
@@ -84,7 +91,7 @@ float circle(vec2 uv, vec2 g_id, vec2 offset) {
    // [0, 1]
    abs_circle_center += g_id;
    // [6, 7]
-   abs_circle_center = abs_circle_center / (amount);
+   abs_circle_center = abs_circle_center / (default_amount * u_zoom);
 
    vec2 rel_mouse = ((u_mouse.xy + offset) / u_resolution.xy);
    rel_mouse.x *= u_resolution.x / u_resolution.y;
@@ -120,7 +127,7 @@ float circle(vec2 uv, vec2 g_id, vec2 offset) {
 
    float circle_alpha = circle_glow * total_alpha;
 
-   float line_alpha_wave = sin(seed * 114.37623 + u_time * (seed * 0.5 + 0.5)) * 0.1;
+   float line_alpha_wave = sin(seed * 114.37623 + u_time * (seed * 0.5 + 0.5)) * 0.2;
 
    return (circle_alpha + line_alpha * (line_alpha_wave + pow(mouse_dist, 10.0)));
    //return mouse_dist;
@@ -128,14 +135,16 @@ float circle(vec2 uv, vec2 g_id, vec2 offset) {
 
 
 void main() {
-   vec2 offset = vec2(u_time * 5., 0.);
+   float speed = 5. * pow(u_speed, 2.0);
+
+   vec2 offset = vec2(u_time * speed, 0.);
 
    vec2 uv = (gl_FragCoord.xy + offset)/u_resolution.xy;
 
    uv.x *= u_resolution.x / u_resolution.y;
 
 
-   vec2 big_uv = uv * amount;
+   vec2 big_uv = uv * default_amount * u_zoom;
 
    vec2 g_id = floor(big_uv);
    vec2 g_uv = mod(big_uv, 1.);   
@@ -155,17 +164,19 @@ void main() {
          circle_alpha += circle(g_uv - coord, g_id + coord, offset) * float(seed > remove_percent);
          // vec3 pretty_color = mix(vec3(0.949,0.733,0.02), vec3(0.204,0.329,0.82), float(rand(g_id + coord) > 0.5));
 
-         color = mix(vec3(1.), vec3(0.204,0.329,0.82), float(rand(g_id + coord * 23.1293) > 0.1));
+         float alpha = sin(uv.x * 23.915 + uv.y * 7.12) * 0.5 + 0.5;
+         // color = mix(vec3(1.), mix(vec3(0.204,0.329,0.82), vec3(0.949,0.733,0.02), sin(uv.x * 99.123 + uv.y * 17.1239) * 0.5 + 0.5), pow(alpha, 20.));
+         color = mix(vec3(1.), vec3(0.204,0.329,0.82), pow(alpha, 2.));
          
       }
    }
 
-   circle_alpha = min(circle_alpha, 1.0);   
+   // circle_alpha = min(circle_alpha, 1.0);   
 
    
 
    // gl_FragColor = vec4(vec3(distance(gl_FragCoord.xy / u_resolution.xy, u_mouse.xy / u_resolution.xy) * 20.), 1.0);
-   gl_FragColor = vec4(vec3(0.), 1.) + vec4(color, 1.0) * pow(circle_alpha, 1.0) * clamp(u_time, 0.0, 1.0);
+   gl_FragColor = vec4(vec3(0.), 1.) + vec4(color, 1.0) * pow(circle_alpha, 1.0) * clamp(u_time, 0.0, 1.0) * u_brightness;
 
    // gl_FragColor = vec4(gl_FragColor.xyz, 0.0);
    // gl_FragColor = mix(vec4(1.,0.,0.,1.), vec4(1.), distanceFromLine(uv, m_uv, vec2(0.5)));

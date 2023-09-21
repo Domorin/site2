@@ -11,14 +11,14 @@ export function Container(props: {
 	return (
 		<div
 			className={classNames(
-				"bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10",
+				"bg-clip-padding backdrop-filter backdrop-blur-sm",
 				props.className,
 				{
-					"bg-secondary": !props.color || props.color === "secondary",
+					"bg-white": !props.color || props.color === "secondary",
 					"bg-sesh-bg": props.color === "sesh-bg",
 					"bg-hackstack-bg": props.color === "hackstack-bg",
-					"bg-white": props.color === "notecraft-bg",
-					"bg-opacity-10": !props.opacity || props.opacity === "10",
+					// "bg-white": props.color === "notecraft-bg",
+					"bg-opacity-20": !props.opacity || props.opacity === "10",
 					"bg-opacity-25": props.opacity === "25",
 					"bg-opacity-50": props.opacity === "50",
 					"bg-opacity-75": props.opacity === "75",

@@ -1,9 +1,8 @@
 import classNames from "classnames";
-import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Electrolize, Gloria_Hallelujah } from "next/font/google";
-import * as shader from "./_shaders/bg_shader";
+import { Electrolize, Gloria_Hallelujah, Inter } from "next/font/google";
 import { Shader } from "./_components/shader";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 export const ElectrolizeFont = Electrolize({
@@ -25,13 +24,12 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	console.log(shader.default);
 	return (
 		<html lang="en">
 			<body
 				className={classNames(
 					inter.className,
-					"text-white bg-transparent text-lg"
+					"text-white bg-foundation text-lg"
 				)}
 			>
 				<Shader />
