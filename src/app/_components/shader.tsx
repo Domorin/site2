@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import test from "../_shaders/bg_shader";
 import {
 	ShaderSettings,
@@ -9,12 +9,20 @@ import {
 } from "../_hooks/use_shader_settings";
 import { ShaderDropdown } from "./shader_dropdown";
 
+function setUniform(ref: MutableRefObject<any>, settings: ShaderSettings) {
+	ref.current?.setUniform("u_speed", settings.speed);
+	ref.current?.setUniform("u_brightness", settings.brightness);
+	ref.current?.setUniform("u_zoom", settings.zoom);
+	ref.current?.setUniform("u_thickness_factor", settings.lineThickness);
+}
+
 export function Shader() {
 	const [shaderSettings, setShaderSettings] = useState({
 		speed: 1,
 		brightness: 1,
 		enabled: 1,
 		zoom: 1,
+		lineThickness: 1,
 	} as ShaderSettings);
 
 	const sandboxRef = useRef<any>(null);
@@ -22,7 +30,6 @@ export function Shader() {
 	useEffect(() => {
 		const glslCanvas = require("glslCanvas");
 
-		console.log("useEffect");
 		const canvas = document.createElement("canvas");
 		canvas.style.width = "100vw";
 		canvas.style.height = "100vh";
@@ -31,19 +38,12 @@ export function Shader() {
 
 		sandboxRef.current.load(test[0]);
 
-		sandboxRef.current?.setUniform("u_speed", shaderSettings.speed);
-		sandboxRef.current?.setUniform(
-			"u_brightness",
-			shaderSettings.brightness
-		);
-		sandboxRef.current?.setUniform("u_zoom", shaderSettings.zoom);
+		setUniform(sandboxRef, shaderSettings);
 
 		document.getElementById("shader-parent")?.replaceChildren(canvas);
 	}, [shaderSettings.enabled]);
 
-	sandboxRef.current?.setUniform("u_speed", shaderSettings.speed);
-	sandboxRef.current?.setUniform("u_brightness", shaderSettings.brightness);
-	sandboxRef.current?.setUniform("u_zoom", shaderSettings.zoom);
+	setUniform(sandboxRef, shaderSettings);
 
 	return (
 		<>

@@ -9,6 +9,7 @@ uniform float u_time;
 uniform float u_brightness;
 uniform float u_speed;
 uniform float u_zoom;
+uniform float u_thickness_factor;
 
 float default_amount = 10.;
 float remove_percent = 0.;
@@ -56,7 +57,7 @@ float distanceFromLine(vec2 p, vec2 uv, vec2 o_uv, float seed) {
    float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
 
    float dist = distance(p, uv);
-   float thickness = 0.015;// * 1./pow(dist, 0.6);
+   float thickness = 0.015 * u_thickness_factor;// * 1./pow(dist, 0.6);
    
 
    return smoothstep(thickness, thickness-0.01, length(pa - ba*h));
@@ -144,7 +145,10 @@ void main() {
    uv.x *= u_resolution.x / u_resolution.y;
 
 
-   vec2 big_uv = uv * default_amount * u_zoom;
+   float actual_zoom = default_amount * u_zoom;
+
+
+   vec2 big_uv = uv * actual_zoom;
 
    vec2 g_id = floor(big_uv);
    vec2 g_uv = mod(big_uv, 1.);   
@@ -164,7 +168,7 @@ void main() {
          circle_alpha += circle(g_uv - coord, g_id + coord, offset) * float(seed > remove_percent);
          // vec3 pretty_color = mix(vec3(0.949,0.733,0.02), vec3(0.204,0.329,0.82), float(rand(g_id + coord) > 0.5));
 
-         float alpha = sin(uv.x * 23.915 + uv.y * 7.12) * 0.5 + 0.5;
+         float alpha = sin((uv.x * 23.915 + uv.y * 7.12) / (1. + (u_zoom - 1.) * default_amount)) * 0.5 + 0.5;
          // color = mix(vec3(1.), mix(vec3(0.204,0.329,0.82), vec3(0.949,0.733,0.02), sin(uv.x * 99.123 + uv.y * 17.1239) * 0.5 + 0.5), pow(alpha, 20.));
          color = mix(vec3(1.), vec3(0.204,0.329,0.82), pow(alpha, 2.));
          

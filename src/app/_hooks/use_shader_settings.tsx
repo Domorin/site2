@@ -5,6 +5,7 @@ export type ShaderSettings = {
 	brightness: number;
 	zoom: number;
 	enabled: number;
+	lineThickness: number;
 };
 
 export const ShaderSettingsContext = createContext({

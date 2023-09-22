@@ -27,7 +27,7 @@
 }
 
 .backdrop-blur-sm {
-	--tw-backdrop-blur: blur(8px);
+	--tw-backdrop-blur: blur(6px);
 	backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
 		var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
 		var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)

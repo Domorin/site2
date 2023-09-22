@@ -53,7 +53,7 @@ export default function Home() {
 				<Section id="stuff" title="My Stuff">
 					<div className="flex gap-8 flex-wrap justify-center">
 						<Card
-							className="border-sesh-bg"
+							className="border-sesh-bg/75"
 							header={
 								<Container
 									className={classNames(
@@ -63,6 +63,7 @@ export default function Home() {
 									color="sesh-bg"
 									opacity="75"
 									noRounded
+									noBorder
 								>
 									sesh
 								</Container>
@@ -84,7 +85,7 @@ export default function Home() {
 							href={"https://sesh.fyi"}
 						/>
 						<Card
-							className="border-hackstack-bg"
+							className="border-hackstack-bg/75"
 							header={
 								<Container
 									className={classNames(
@@ -94,6 +95,7 @@ export default function Home() {
 									color="hackstack-bg"
 									opacity="75"
 									noRounded
+									noBorder
 								>
 									<Image
 										className="mx-auto my-auto"
@@ -113,9 +115,15 @@ export default function Home() {
 							}
 						/>
 						<Card
-							className="border-white"
+							className="border-white/75"
 							header={
-								<div className="w-full flex items-center bg-white text-black h-16 font-bold text-2xl">
+								<Container
+									color="notecraft-bg"
+									className="w-full flex items-center h-16 font-bold text-2xl text-black"
+									opacity="75"
+									noBorder
+									noRounded
+								>
 									<div className="w-fit mx-auto flex items-center gap-2">
 										<Image
 											src={"/notecraft.png"}
@@ -125,7 +133,7 @@ export default function Home() {
 										/>{" "}
 										NoteCraft
 									</div>
-								</div>
+								</Container>
 							}
 							body={
 								"An open-source collaborative note editor with a focus on simplicity. Easy notes with no login required."

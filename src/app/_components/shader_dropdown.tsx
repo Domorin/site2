@@ -95,6 +95,17 @@ export function ShaderDropdown() {
 									<MyButton power={6} type="zoom" />
 								</div>
 							</div>
+							<div className="flex flex-col gap-1">
+								<div>Line Thickness</div>
+								<div className="flex gap-1">
+									<MyButton power={1} type="lineThickness" />
+									<MyButton power={2} type="lineThickness" />
+									<MyButton power={3} type="lineThickness" />
+									<MyButton power={4} type="lineThickness" />
+									<MyButton power={5} type="lineThickness" />
+									<MyButton power={6} type="lineThickness" />
+								</div>
+							</div>
 						</div>
 					</Container>
 				</div>

@@ -7,6 +7,7 @@ export function Container(props: {
 	color?: "secondary" | "sesh-bg" | "hackstack-bg" | "notecraft-bg";
 	opacity?: "10" | "25" | "50" | "75";
 	noRounded?: boolean;
+	noBorder?: boolean;
 }) {
 	return (
 		<div
@@ -14,15 +15,19 @@ export function Container(props: {
 				"bg-clip-padding backdrop-filter backdrop-blur-sm",
 				props.className,
 				{
-					"bg-white": !props.color || props.color === "secondary",
+					"bg-white":
+						!props.color ||
+						props.color === "secondary" ||
+						props.color === "notecraft-bg",
 					"bg-sesh-bg": props.color === "sesh-bg",
 					"bg-hackstack-bg": props.color === "hackstack-bg",
 					// "bg-white": props.color === "notecraft-bg",
-					"bg-opacity-20": !props.opacity || props.opacity === "10",
+					"bg-opacity-5": !props.opacity || props.opacity === "10",
 					"bg-opacity-25": props.opacity === "25",
 					"bg-opacity-50": props.opacity === "50",
 					"bg-opacity-75": props.opacity === "75",
 					"rounded-md": !props.noRounded,
+					"border border-white/30": !props.noBorder,
 				}
 			)}
 		>
