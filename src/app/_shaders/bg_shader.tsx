@@ -12,7 +12,7 @@ uniform float u_zoom;
 uniform float u_thickness_factor;
 
 float default_amount = 10.;
-float remove_percent = 0.;
+float remove_percent = 0.5;
 float attraction_value = 50.;
 
 
@@ -79,7 +79,10 @@ float line(vec2 uv, vec2 g_id, vec2 offset, float seed) {
 
          // 0.5, 0.5
          // -1.5, -1.5
-         line += distanceFromLine(uv, circle_center(g_id, offset)+0.0001, circle_center(g_id + coord, offset) + coord * 2., seed) * float(seed > remove_percent);
+
+         float alpha = sin(seed * 6.18 + u_time * seed) * 0.5 + 0.5;
+         line += distanceFromLine(uv, circle_center(g_id, offset)+0.0001, circle_center(g_id + coord, offset) + coord * 2., seed) * float(seed > remove_percent) * alpha;
+         
       }
    }
    return line;
@@ -128,7 +131,7 @@ float circle(vec2 uv, vec2 g_id, vec2 offset) {
 
    float circle_alpha = circle_glow * total_alpha;
 
-   float line_alpha_wave = sin(seed * 114.37623 + u_time * (seed * 0.5 + 0.5)) * 0.2;
+   float line_alpha_wave = 0.2; //sin(seed * 114.37623 + u_time * (seed * 0.5 + 0.5)) * 0.2;
 
    return (circle_alpha + line_alpha * (line_alpha_wave + pow(mouse_dist, 10.0)));
    //return mouse_dist;
