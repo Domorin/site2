@@ -9,6 +9,7 @@ import {
 } from "../_hooks/use_shader_settings";
 import { ShaderDropdown } from "./shader_dropdown";
 import { getGPUTier } from "detect-gpu";
+import Image from "next/image";
 
 function setUniform(ref: MutableRefObject<any>, settings: ShaderSettings) {
 	ref.current?.setUniform("u_speed", settings.speed);
@@ -47,6 +48,11 @@ export function Shader() {
 			return;
 		}
 
+		if (!hasWebGLSupport()) {
+			setShaderSettings((prev) => ({ ...prev, enabled: 0 }));
+			return;
+		}
+
 		getGPUTier()
 			.then((val) => {
 				console.log(val);
@@ -78,6 +84,8 @@ export function Shader() {
 
 	setUniform(sandboxRef, shaderSettings);
 
+	console.log(Boolean(shaderSettings.enabled));
+
 	return (
 		<>
 			<ShaderSettingsContext.Provider
@@ -87,11 +95,19 @@ export function Shader() {
 				}}
 			>
 				<ShaderDropdown />
-				{Boolean(shaderSettings.enabled) && (
+				{Boolean(shaderSettings.enabled) ? (
 					<div
 						id="shader-parent"
 						className="bg-transparent fixed top-0 left-0 -z-10"
 					></div>
+				) : (
+					<div className="fixed top-0 left-0 -z-10 min-w-[1920px] min-h-[1080px]">
+						<Image
+							src="/shader_bg.png"
+							layout="fill"
+							alt="Still image of background shader"
+						/>
+					</div>
 				)}
 			</ShaderSettingsContext.Provider>
 		</>
