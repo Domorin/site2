@@ -183,7 +183,10 @@ void main() {
    
 
    // gl_FragColor = vec4(vec3(distance(gl_FragCoord.xy / u_resolution.xy, u_mouse.xy / u_resolution.xy) * 20.), 1.0);
-   gl_FragColor = vec4(vec3(0.), 1.) + vec4(color, 1.0) * pow(circle_alpha, 1.0) * clamp(u_time, 0.0, 1.0) * u_brightness;
+   float alpha = pow(circle_alpha, 1.0) * clamp(u_time, 0.0, 1.0) * u_brightness;
+
+   gl_FragColor = vec4(color, 1.0) * pow(circle_alpha, 1.0) * clamp(u_time, 0.0, 1.0) * u_brightness;
+   
 
    // gl_FragColor = vec4(gl_FragColor.xyz, 0.0);
    // gl_FragColor = mix(vec4(1.,0.,0.,1.), vec4(1.), distanceFromLine(uv, m_uv, vec2(0.5)));

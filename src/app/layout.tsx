@@ -29,7 +29,7 @@ export default function RootLayout({
 			<body
 				className={classNames(
 					inter.className,
-					"text-white bg-foundation text-lg"
+					"text-white bg-gradient-to-r from-foundation to-gray-950 text-lg"
 				)}
 			>
 				<Shader />
