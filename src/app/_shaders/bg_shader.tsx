@@ -120,7 +120,7 @@ float circle(vec2 uv, vec2 g_id, vec2 offset) {
    float radius = rand(g_id) * 0.5 + 0.5;
    radius *= 0.;
 
-   vec2 c_uv = uv * 2. - 1.;
+   vec2 c_uv = uv * 2. - 1.;  
 
    float circle_glow = pow(1./(1. + distance(c_uv, circle_center) - radius), 20.);
    //float circle_base = smoothstep(radius, radius/2., distance(c_uv, circle_center));
