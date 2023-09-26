@@ -13,43 +13,48 @@ export default function Home() {
 		<main className="w-full h-full flex items-center flex-col bg-opacity-0 px-1">
 			{/* <div className="flex flex-col items-center mt-24 bg-gradient-to-r from-black/0 via-blue-700 to-black/0 w-1/2 p-8 "> */}
 			<div className="flex gap-8 flex-col items-center my-12 w-full sm:w-[860px] rounded-lg">
-				<h1 className="text-6xl">
-					Hi, I'm{" "}
-					<span className="font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
-						Cody
-					</span>
-				</h1>
-				<Container className="h-full w-full p-4">
-					<p>
-						I'm a fullstack software engineer currently residing in
-						Portland, Oregon. My passion lies in crafting innovative
-						product designs and bringing them to life. When I'm not
-						creating cool stuff, you can find me{" "}
-						<a
-							className="link"
-							href="https://www.hltv.org/stats/players/15128/domorin"
-						>
-							enjoying
-						</a>{" "}
-						<a
-							className="link"
-							href="https://liquipedia.net/starcraft2/Domorin"
-						>
-							competitive
-						</a>{" "}
-						<a
-							className="link"
-							href="https://www.youtube.com/@Doomorin"
-						>
-							gaming
-						</a>
-						, playing pickleball, and petting{" "}
-						<a className="link" href="#cats">
-							cats
-						</a>
-						.
-					</p>
-				</Container>
+				<div className="h-screen flex flex-col gap-8">
+					<h1 className="sm:text-8xl text-6xl h-[40vh] flex gap-4 items-end justify-items-end">
+						<div className="text-center w-full">
+							Hi, I'm{" "}
+							<span className="font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+								Cody
+							</span>
+						</div>
+					</h1>
+					<Container className="p-4">
+						<p>
+							I'm a fullstack software engineer currently residing
+							in Portland, Oregon. My passion lies in crafting
+							innovative product designs and bringing them to
+							life. When I'm not creating cool stuff, you can find
+							me{" "}
+							<a
+								className="link"
+								href="https://www.hltv.org/stats/players/15128/domorin"
+							>
+								enjoying
+							</a>{" "}
+							<a
+								className="link"
+								href="https://liquipedia.net/starcraft2/Domorin"
+							>
+								competitive
+							</a>{" "}
+							<a
+								className="link"
+								href="https://www.youtube.com/@Doomorin"
+							>
+								gaming
+							</a>
+							, playing pickleball, and petting{" "}
+							<a className="link" href="#cats">
+								cats
+							</a>
+							.
+						</p>
+					</Container>
+				</div>
 				<Section id="stuff" title="My Stuff">
 					<div className="flex gap-8 flex-wrap justify-center">
 						<Card
