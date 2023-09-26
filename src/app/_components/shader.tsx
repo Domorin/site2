@@ -55,10 +55,8 @@ export function Shader() {
 
 		getGPUTier()
 			.then((val) => {
-				console.log(val);
 				// If this is not in the initial useEffect, user is opting in to enable the shader; let them
 				if (val.tier < 2 && !hasInitialUseEffectRun.current) {
-					console.log("Hello?");
 					setShaderSettings((prev) => ({ ...prev, enabled: 0 }));
 					return;
 				}
@@ -83,8 +81,6 @@ export function Shader() {
 	}, [shaderSettings.enabled]);
 
 	setUniform(sandboxRef, shaderSettings);
-
-	console.log(Boolean(shaderSettings.enabled));
 
 	return (
 		<>
