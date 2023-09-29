@@ -90,14 +90,6 @@ export const TestGlow = ({
 	useEffect(() => {
 		const observer = new ResizeObserver(() => {
 			requestAnimationFrame(() => {
-				console.log("HELLO?");
-
-				console.log(element.current?.getBoundingClientRect());
-
-				console.log({
-					top: element.current?.offsetTop,
-					left: element.current?.offsetLeft,
-				});
 				element.current?.style.setProperty(
 					"--glow-top",
 					`${element.current?.offsetTop}px`
