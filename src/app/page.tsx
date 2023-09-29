@@ -35,18 +35,21 @@ export default function Home() {
 									<a
 										className="link"
 										href="https://www.hltv.org/stats/players/15128/domorin"
+										target="_blank"
 									>
 										enjoying
 									</a>{" "}
 									<a
 										className="link"
 										href="https://liquipedia.net/starcraft2/Domorin"
+										target="_blank"
 									>
 										competitive
 									</a>{" "}
 									<a
 										className="link"
 										href="https://www.youtube.com/@Doomorin"
+										target="_blank"
 									>
 										gaming
 									</a>
