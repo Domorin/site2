@@ -15,7 +15,7 @@ export function Card(props: {
 			href={props.href}
 			className={classNames(
 				props.className,
-				"rounded-lg shadow-lg transition-all flex flex-col w-80 items-center border-2 overflow-hidden hover:-translate-x-1 hover:-translate-y-1 hover:border-primary bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10"
+				"rounded-lg shadow-lg transition-all flex flex-col w-80 items-center border-2 overflow-hidden hover:border-primary bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 glow:border-primary glow:bg-glow/[.05]"
 			)}
 		>
 			<Container className="h-full flex flex-col" noBorder>

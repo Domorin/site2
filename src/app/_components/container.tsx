@@ -1,5 +1,7 @@
+import { Glow, GlowCapture } from "@codaworks/react-glow";
 import classNames from "classnames";
 import { ReactNode } from "react";
+import { TestGlow } from "./glow/test_glow";
 
 export function Container(props: {
 	className?: string;
@@ -27,7 +29,8 @@ export function Container(props: {
 					"bg-opacity-50": props.opacity === "50",
 					"bg-opacity-75": props.opacity === "75",
 					"rounded-md": !props.noRounded,
-					"border border-white/30": !props.noBorder,
+					"border border-white/30 glow:border-glow glow:bg-glow/[.05]":
+						!props.noBorder,
 				}
 			)}
 		>

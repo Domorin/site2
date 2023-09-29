@@ -4,6 +4,8 @@ import { Electrolize, Gloria_Hallelujah, Inter } from "next/font/google";
 import { Shader } from "./_components/shader";
 import "./globals.css";
 import Head from "next/head";
+import { Glow, GlowCapture } from "@codaworks/react-glow";
+import { TestGlowCapture } from "./_components/glow/test_glow";
 
 const inter = Inter({ subsets: ["latin"] });
 export const ElectrolizeFont = Electrolize({
@@ -33,8 +35,10 @@ export default function RootLayout({
 					"text-white bg-gradient-to-r from-foundation to-gray-950 text-lg"
 				)}
 			>
-				<Shader />
-				{children}
+				<TestGlowCapture size={600}>
+					<Shader />
+					{children}
+				</TestGlowCapture>
 			</body>
 		</html>
 	);
