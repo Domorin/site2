@@ -10,6 +10,7 @@ export function Container(props: {
 	opacity?: "10" | "25" | "50" | "75";
 	noRounded?: boolean;
 	noBorder?: boolean;
+	disableGlow?: boolean;
 }) {
 	return (
 		<div
@@ -29,8 +30,9 @@ export function Container(props: {
 					"bg-opacity-50": props.opacity === "50",
 					"bg-opacity-75": props.opacity === "75",
 					"rounded-md": !props.noRounded,
-					"border border-white/30 glow:border-glow glow:bg-glow/[.05]":
-						!props.noBorder,
+					"border border-white/30 ": !props.noBorder,
+					"glow:ring glow:border-primary m-[2px] glow:ring-primary glow:text-primary/[.15]":
+						!props.disableGlow,
 				}
 			)}
 		>

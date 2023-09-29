@@ -75,6 +75,7 @@ export default function Home() {
 										opacity="75"
 										noRounded
 										noBorder
+										disableGlow
 									>
 										sesh
 									</Container>
@@ -107,6 +108,7 @@ export default function Home() {
 										opacity="75"
 										noRounded
 										noBorder
+										disableGlow
 									>
 										<Image
 											className="mx-auto my-auto"
@@ -134,6 +136,7 @@ export default function Home() {
 										opacity="75"
 										noBorder
 										noRounded
+										disableGlow
 									>
 										<div className="w-fit mx-auto flex items-center gap-2">
 											<Image
@@ -161,9 +164,9 @@ export default function Home() {
 					</Section>
 				</TestGlow>
 				<Section id="experience" title="My Experience">
-					<div className="flex flex-col gap-4">
+					<div className="flex flex-col gap-4 w-full">
 						<TestGlow color="#F2BB05">
-							<Container className="flex flex-col w-full gap-4 p-8">
+							<Container className="flex flex-col gap-4 p-8">
 								<div className="text-2xl w-full">Tunks LLC</div>
 								<div className="flex flex-col gap-4">
 									<ExperienceItem
@@ -201,7 +204,7 @@ export default function Home() {
 							</Container>
 						</TestGlow>
 						<TestGlow color="#F2BB05">
-							<Container className="p-8 w-full h-full">
+							<Container className="p-8">
 								<ExperienceItem
 									title="Cloud Software Engineer Intern"
 									company="Gerber Technology"
@@ -218,7 +221,7 @@ export default function Home() {
 				<Section id="education" title="My Education">
 					<div className="flex flex-col w-full gap-4">
 						<TestGlow color="#F2BB05">
-							<Container className="p-8 w-full h-full">
+							<Container className="p-8">
 								<ExperienceItem
 									title="Bachelor of Science, Computer Science, Minor in Math"
 									company="University of Connecticut, Storrs"
@@ -229,7 +232,7 @@ export default function Home() {
 							</Container>
 						</TestGlow>
 						<TestGlow color="#F2BB05">
-							<Container className="p-8 w-full h-full">
+							<Container className="p-8">
 								<ExperienceItem
 									title="Associate in Arts, Math/Science"
 									company="Norwalk Community College"

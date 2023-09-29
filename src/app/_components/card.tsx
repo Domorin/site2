@@ -18,7 +18,7 @@ export function Card(props: {
 				"rounded-lg shadow-lg transition-all flex flex-col w-80 items-center border-2 overflow-hidden hover:border-primary bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 glow:border-primary glow:bg-glow/[.05]"
 			)}
 		>
-			<Container className="h-full flex flex-col" noBorder>
+			<Container className="h-full flex flex-col" noBorder disableGlow>
 				{props.header}
 				<div className="p-4 w-full">{props.body}</div>
 				<div className="text-sm w-full px-4 mt-auto pb-4">

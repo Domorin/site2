@@ -57,7 +57,7 @@ export const TestGlowCapture = ({ className = "", size = 400, ...rest }) => {
 
 const mask = `
 radial-gradient(var(--glow-size) var(--glow-size) at calc(var(--glow-x, -999px) - var(--glow-left, 0px))
-calc(var(--glow-y, -999px) - var(--glow-top, 0px)), #000000 1%, transparent 50%)
+calc(var(--glow-y, -999px) - var(--glow-top, 0px)), #000000 0%, transparent 50%)
 `;
 
 export const TestGlow = ({
@@ -123,7 +123,7 @@ export const TestGlow = ({
 			{...rest}
 		>
 			<div
-				className={className}
+				className={className + " w-full"}
 				style={{
 					...style,
 					gridArea: "1/1/1/1",
@@ -140,7 +140,7 @@ export const TestGlow = ({
 				style={
 					{
 						...style,
-						"--glow-color": color,
+						"--glow-color": undefined,
 						gridArea: "1/1/1/1",
 						pointerEvents: "none",
 						mask: debug ? undefined : mask,

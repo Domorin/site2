@@ -21,7 +21,7 @@ export function ExperienceItem(props: {
 				</p>
 			</div>
 			{props.company && <div>{props.company}</div>}
-			<ul className="list-disc list-inside text-base text-white">
+			<ul className="list-disc list-inside text-base text-inherit">
 				{props.bullets.map((bullet, index) => (
 					<li key={index}>{bullet}</li>
 				))}
