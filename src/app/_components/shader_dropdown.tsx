@@ -10,6 +10,8 @@ import { Container } from "./container";
 export function ShaderDropdown() {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const { shaderSettings, setShaderSettings } = useShaderSettings();
+
 	return (
 		<div className="absolute right-2 top-2">
 			<div>
@@ -106,6 +108,11 @@ export function ShaderDropdown() {
 									<MyButton power={6} type="lineThickness" />
 								</div>
 							</div>
+							{shaderSettings.isPaused && (
+								<div className="text-xs text-red-400">
+									Shader paused due to bad performance
+								</div>
+							)}
 						</div>
 					</Container>
 				</div>

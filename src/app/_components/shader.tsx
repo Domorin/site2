@@ -40,6 +40,7 @@ export function Shader() {
 		enabled: 1,
 		zoom: 1,
 		lineThickness: 1,
+		isPaused: false,
 	} as ShaderSettings);
 
 	const sandboxRef = useRef<any>(null);
@@ -77,16 +78,12 @@ export function Shader() {
 				badDeltaCounter.current++;
 
 				if (badDeltaCounter.current > 5 && !hasDeclined.current) {
-					const result = confirm(
-						"The background appears to be slowing down this page, would you like to disable it?"
-					);
-
-					if (result) {
-						setShaderSettings((prev) => ({ ...prev, enabled: 0 }));
-						localStorage.setItem("shaderDisabled", "1");
-					} else {
-						hasDeclined.current = true;
-					}
+					console.log("Detected bad performance. Pausing shader.");
+					sandboxRef?.current?.pause();
+					setShaderSettings((prev) => ({
+						...prev,
+						isPaused: true,
+					}));
 				}
 			} else {
 				badDeltaCounter.current = Math.max(
