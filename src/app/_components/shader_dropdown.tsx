@@ -131,12 +131,19 @@ function MyButton(props: {
 					"text-primary": shaderSettings[props.type] !== props.power,
 				}
 			)}
-			onClick={() =>
+			onClick={() => {
 				setShaderSettings({
 					...shaderSettings,
 					[props.type]: props.power,
-				})
-			}
+				});
+
+				if (props.type === "enabled") {
+					localStorage.setItem(
+						"shaderDisabled",
+						props.power === 1 ? "0" : "1"
+					);
+				}
+			}}
 		>
 			{props.labelOverride ? props.labelOverride : props.power}
 		</button>

@@ -9,7 +9,7 @@ import {
 } from "../_hooks/use_shader_settings";
 import { ShaderDropdown } from "./shader_dropdown";
 import { getGPUTier } from "detect-gpu";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 function setUniform(ref: MutableRefObject<any>, settings: ShaderSettings) {
 	ref.current?.setUniform("u_speed", settings.speed);
@@ -31,6 +31,8 @@ function hasWebGLSupport() {
 	}
 }
 
+const desiredDelta = 1 / 30;
+
 export function Shader() {
 	const [shaderSettings, setShaderSettings] = useState({
 		speed: 1,
@@ -43,8 +45,81 @@ export function Shader() {
 	const sandboxRef = useRef<any>(null);
 	const hasInitialUseEffectRun = useRef(false);
 
+	const lastFrameTime = useRef(performance.now());
+	const badDeltaCounter = useRef(0);
+	const hasDeclined = useRef(false);
+	const isFocused = useRef(true);
+
 	useEffect(() => {
-		if (!shaderSettings.enabled) {
+		if (!shaderSettings.enabled) return;
+
+		function onFocus() {
+			isFocused.current = true;
+			lastFrameTime.current = performance.now();
+		}
+		function onBlur() {
+			isFocused.current = false;
+			badDeltaCounter.current = 0;
+		}
+
+		const interval = setInterval(() => {
+			if (!isFocused.current) {
+				return;
+			}
+
+			const now = performance.now();
+
+			window.addEventListener("focus", onFocus);
+			window.addEventListener("blur", onBlur);
+
+			const delta = now - lastFrameTime.current;
+			if (delta > desiredDelta * 1000) {
+				badDeltaCounter.current++;
+
+				if (badDeltaCounter.current > 5 && !hasDeclined.current) {
+					const result = confirm(
+						"The background appears to be slowing down this page, would you like to disable it?"
+					);
+
+					if (result) {
+						setShaderSettings((prev) => ({ ...prev, enabled: 0 }));
+						localStorage.setItem("shaderDisabled", "1");
+					} else {
+						hasDeclined.current = true;
+					}
+				}
+			} else {
+				badDeltaCounter.current = Math.max(
+					badDeltaCounter.current - 0.5,
+					0
+				);
+			}
+
+			lastFrameTime.current = now;
+		});
+
+		return () => {
+			clearInterval(interval);
+			window.removeEventListener("focus", onFocus);
+			window.removeEventListener("blur", onBlur);
+		};
+	}, [shaderSettings.enabled]);
+
+	useEffect(() => {
+		const shaderEnabled = localStorage.getItem("shaderDisabled") !== "1";
+
+		if (shaderEnabled !== (shaderSettings.enabled === 0 ? false : true)) {
+			setShaderSettings((prev) => ({
+				...prev,
+				enabled: shaderEnabled ? 1 : 0,
+			}));
+		}
+
+		if (!shaderEnabled) {
+			if (sandboxRef.current) {
+				sandboxRef.current.destroy();
+				sandboxRef.current = null;
+			}
 			return;
 		}
 
@@ -58,6 +133,7 @@ export function Shader() {
 				// If this is not in the initial useEffect, user is opting in to enable the shader; let them
 				if (val.tier < 2 && !hasInitialUseEffectRun.current) {
 					setShaderSettings((prev) => ({ ...prev, enabled: 0 }));
+					localStorage.setItem("shaderDisabled", "1");
 					return;
 				}
 

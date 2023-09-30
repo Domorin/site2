@@ -248,8 +248,8 @@ export default function Home() {
 					</div>
 				</Section>
 				<Section id="cats" title="My Cats">
-					<div className="flex sm:flex-row flex-col w-full h-[42rem]">
-						<div className="h-full sm:w-1/2">
+					<div className="flex sm:flex-row flex-col w-full sm:h-[42rem]">
+						<div className="h-[42rem] sm:w-1/2">
 							<CatImage
 								cuteImage={{
 									src: "/cats/cute_egbert.JPEG",
@@ -261,7 +261,7 @@ export default function Home() {
 								}}
 							/>
 						</div>
-						<div className="sm:w-1/2">
+						<div className="h-[42rem] sm:w-1/2">
 							<CatImage
 								cuteImage={{
 									src: "/cats/cute_sypha.JPEG",
