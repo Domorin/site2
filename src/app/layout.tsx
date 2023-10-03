@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import type { Metadata } from "next";
 import { Electrolize, Gloria_Hallelujah, Inter } from "next/font/google";
-import { Shader } from "./_components/shader";
 import "./globals.css";
 import Head from "next/head";
 import { Glow, GlowCapture } from "@codaworks/react-glow";
 import { TestGlowCapture } from "./_components/glow/test_glow";
+import { Shader } from "./_components/shader3";
 
 const inter = Inter({ subsets: ["latin"] });
 export const ElectrolizeFont = Electrolize({
